@@ -16,9 +16,9 @@ namespace EntityLayer.Concrete
         public string CategoryName { get; set; }
         [StringLength(200)]
         public string CategoryDescription { get; set; }
-        //Status (Durum) Aktif pasif yapma işlemi kullanacağız.
+        //todo Status (Durum) Aktif pasif yapma işlemi kullanacağız.
         public bool CategoryStatus { get; set; }
-        // Bire Çok bir ilişki kurduk. (Heading Tablosu ile)
+        //todo Bire Çok bir ilişki kurduk. (Heading Tablosu ile)
         public ICollection<Heading> Headings { get; set; }
     }
 }

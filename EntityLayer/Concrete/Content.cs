@@ -9,18 +9,19 @@ namespace EntityLayer.Concrete
 {
     public class Content
     {
-        //İçerik sınıfımız.
+        //todo İçerik sınıfımız.
         [Key]
         public int ContentID { get; set; }
-        //İçeriğin Değeri
+        //todo İçeriğin Değeri
         [StringLength(1000)]
         public string ContentValue { get; set; }
         public DateTime ContentDate { get; set; }
-        //İLİŞKİLER
+        //todo İLİŞKİLER
         public int HeadingID { get; set; }
         public virtual Heading Heading { get; set; }
 
-        public int WriterID { get; set; }
+        //todo Bos gecilebilir yaptık.
+        public int? WriterID { get; set; }
         public virtual Writer Writer { get; set; }  
     }
 }
