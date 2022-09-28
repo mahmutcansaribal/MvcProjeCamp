@@ -36,7 +36,7 @@ namespace DataAccessLayer.Concrete.Repositories
             _object.Add(p);
             c.SaveChanges();
         }
-
+        //todo Listeleme işlemi.
         public List<T> List()
         {
             return _object.ToList();
