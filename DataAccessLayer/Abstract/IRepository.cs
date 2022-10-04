@@ -12,6 +12,8 @@ namespace DataAccessLayer.Abstract
     {
         List<T> List();
         void Insert(T p);
+        //todo mesela IDSI 5 olan yazarı getirir yani tek deger döndürür.
+        T Get(Expression<Func<T, bool>> filter);
         void Update(T p);
         void Delete(T p);
         //todo Şartlı Arama yapar! (filtreli)

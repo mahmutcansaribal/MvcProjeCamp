@@ -23,17 +23,26 @@ namespace DataAccessLayer.Concrete.Repositories
             //todo Dışarıdan gelen T degerini atadık. dışarıdan gelen entity neyse o olacaktır.
             _object = c.Set<T>();
         }
-
-
         public void Delete(T p)
         {
-            _object.Remove(p);
+            //EntityFramework'den kullanılan methodlar.
+            var deletedEntity = c.Entry(p);
+            deletedEntity.State = EntityState.Deleted;
+            // _object.Remove(p);
             c.SaveChanges();
         }
-
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            //todo bir dizide ya da listede geriye 1 tane deger döndürmek için kullanılan methottur. ID sı 5 olan yazarı getirmek için
+            return _object.SingleOrDefault(filter);
+        }
         public void Insert(T p)
         {
-            _object.Add(p);
+            //todo EntityFramework'den kullanılan Methodlar.
+            //todo ekleme işleimi entitystate üzerinden yapmaya başladık.
+            var addedEntity = c.Entry(p);
+            addedEntity.State = EntityState.Added;
+            // _object.Add(p);
             c.SaveChanges();
         }
         //todo Listeleme işlemi.
@@ -41,7 +50,7 @@ namespace DataAccessLayer.Concrete.Repositories
         {
             return _object.ToList();
         }
-
+        //todo Burada Komple bir deger döndürülür mesela tüm yazarları
         public List<T> List(Expression<Func<T, bool>> filter)
         {
             return _object.Where(filter).ToList();
@@ -49,6 +58,9 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Update(T p)
         {
+            //todo guncelleme islmeleri yapıldı.
+            var updatedEntity = c.Entry(p);
+            updatedEntity.State = EntityState.Modified;
             c.SaveChanges();
         }
     }
