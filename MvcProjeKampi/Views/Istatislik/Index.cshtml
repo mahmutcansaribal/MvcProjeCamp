@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br /><br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@ViewBag.kategoriSayisi</h3>
+
+                        <p>Kategori Sayısı</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@ViewBag.diziCount</h3>
+
+                        <p>Dizi Kategorisine ait başlık sayısı</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewBag.yazarA</h3>
+
+                        <p>İsmin de A bulunan Yazar Sayısı.</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewBag.enfazla</h3>
+
+                        <p>En fazla Başlıga sahip Kategori</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewBag.categoryFark</h3>
+
+                        <p>Açık ve Kapalı Kategori Farkı.</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
