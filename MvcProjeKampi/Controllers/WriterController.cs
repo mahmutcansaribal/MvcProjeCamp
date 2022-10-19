@@ -14,6 +14,7 @@ namespace MvcProjeKampi.Controllers
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterDal());
+        WriterValidator writerValidator = new WriterValidator();
         public ActionResult Index()
         {
             var writerValues = wm.GetList();
@@ -27,7 +28,7 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult AddWriter(Writer p)
         {
-            WriterValidator writerValidator = new WriterValidator();
+            
             ValidationResult result = writerValidator.Validate(p);
             if (result.IsValid)
             {
@@ -36,13 +37,36 @@ namespace MvcProjeKampi.Controllers
             }
             else
             {
-                foreach(var item in result.Errors)
+                foreach (var item in result.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
             return View();
-            
+        }
+        [HttpGet]
+        public ActionResult Editwriter(int id)
+        {
+            var writerValue = wm.GetByID(id);
+            return View(writerValue);
+        }
+        [HttpPost]
+        public ActionResult Editwriter(Writer p)
+        {
+            ValidationResult result = writerValidator.Validate(p);
+            if (result.IsValid)
+            {
+                wm.WriterUpdate(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
         }
     }
 }

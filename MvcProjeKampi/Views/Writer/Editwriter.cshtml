@@ -1,19 +1,19 @@
 ﻿@model EntityLayer.Concrete.Writer
 @{
-    ViewBag.Title = "AddWriter";
+    ViewBag.Title = "Editwriter";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h1>Yeni Yazar Ekleme</h1>
 <br />
+<h2>Yazar Düzenleme Sayfası</h2>
 
-
-@using (Html.BeginForm("AddWriter", "Writer", FormMethod.Post))
+@using (Html.BeginForm("EditWriter", "Writer", FormMethod.Post))
 {
 
     <div class="form-group">
+        @Html.TextBoxFor(x => x.WriterID, new { @class = "form-control", @style = "display: none;" })
+        <br />
         @Html.Label("Yazar Adı")
-        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control"})
+        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
         <br />
         @Html.Label("Yazar SoyAdı")
@@ -32,16 +32,15 @@
         @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-danger" })
         <br />
-        @Html.Label("Yazar Hakkında")
-        @Html.TextBoxFor(x => x.WriterAbout, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.WriterAbout, "", new { @class = "text-danger" })
-        <br />
         @Html.Label("Yazar Ünvanı")
         @Html.TextBoxFor(x => x.WriterTitle, new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.WriterTitle, "", new { @class = "text-danger" })
         <br />
-        <button class="btn btn-info">YAZARI EKLE</button>
-
+        @Html.Label("Yazar Hakkında")
+        @Html.TextBoxFor(x => x.WriterAbout, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterAbout, "", new { @class = "text-danger" })
+        <br />
+        <button class="btn btn-success">DEĞİŞİKLERİ KAYDET</button>
     </div>
 }
 
