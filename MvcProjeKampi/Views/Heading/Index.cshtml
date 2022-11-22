@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@{ 
+@{
     string color = "";
+    // GELEN DURUMA GÖRE TRUE  YEŞİL VE AKTİF YAZMALI FALSE İSE KIRMIZI VE PASİF YAZMALI
+    string name = "";
+    string headingColor = "";
 }
 
 <!DOCTYPE html>
@@ -18,7 +21,6 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Projects</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -48,8 +50,11 @@
                             <th style="width: 20%">
                                 Başlık Adı
                             </th>
-                            <th style="width: 30%">
+                            <th style="width: 15%">
                                 Oluşturan Yazar
+                            </th>
+                            <th style="width: 10%">
+                                Durum
                             </th>
                             <th style="width: 8%" class="text-center">
                                 Kategori
@@ -61,11 +66,12 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if(item.Category.CategoryName == "Tiyatro")
+
+                            if (item.Category.CategoryName == "Tiyatro")
                             {
                                 color = "badge badge-warning";
                             }
-                            else if(item.Category.CategoryName == "Spor")
+                            else if (item.Category.CategoryName == "Spor")
                             {
                                 color = "badge badge-danger";
                             }
@@ -85,6 +91,21 @@
                             {
                                 color = "badge badge-secondary";
                             }
+
+                            //------HEADING------
+
+                            switch (item.HeadingStatus)
+                            {
+                                case true:
+                                    headingColor = "badge badge-success";
+                                    name = "Aktif";
+                                    break;
+                                case false:
+                                    headingColor = "badge badge-danger";
+                                    name = "Pasif";
+                                    break;
+                            }
+
                             <tr>
                                 <td>
                                     @item.HeadingID
@@ -95,31 +116,37 @@
                                     </a>
                                     <br />
                                     <small>
-                                        @item.HeadingDate
+                                        @(((DateTime)item.HeadingDate).ToString("dd-MM-yyyy"))
                                     </small>
+
                                 </td>
+
                                 <td>
+
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <img alt="Avatar" class="table-avatar" src="@item.Writers.WriterImage">
                                         </li>
                                     </ul>
                                 </td>
+                                <td>
+                                    <span class="@headingColor">@name</span>
+                                </td>
                                 <td class="project-state">
                                     <span class="@color">@item.Category.CategoryName</span>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
+                                    <a class="btn btn-primary btn-sm" href="/Content/ContentByHeading/@item.HeadingID">
                                         <i class="fas fa-folder">
                                         </i>
                                         Yazılar
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    <a class="btn btn-info btn-sm" href="/Heading/EditHeading/@item.HeadingID">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Düzenle
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
+                                    <a class="btn btn-danger btn-sm" href="/Heading/DeleteHeading/@item.HeadingID">
                                         <i class="fas fa-trash">
                                         </i>
                                         Sil
@@ -136,6 +163,7 @@
     </section>
 </body>
 </html>
+<a href="/Heading/AddHeading/" class="btn btn-primary"> Yeni Başlık Girişi</a>
 
 
 
@@ -148,7 +176,7 @@
             <th>Kategori</th>
         </tr>
         @foreach(var item in Model)
-        {
+                        {
             <tr>
                 <td>@item.HeadingID</td>
                 <td>@item.HeadingName</td>
