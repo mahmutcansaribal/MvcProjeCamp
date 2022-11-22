@@ -51,6 +51,7 @@ namespace DataAccessLayer.Concrete.Repositories
             return _object.ToList();
         }
         //todo Burada Komple bir deger döndürülür mesela tüm yazarları
+        //todo parametreli list
         public List<T> List(Expression<Func<T, bool>> filter)
         {
             return _object.Where(filter).ToList();
